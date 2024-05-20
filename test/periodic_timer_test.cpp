@@ -22,7 +22,6 @@
 #include <system_error>
 
 #include "asio/executor_work_guard.hpp"
-#include "asio/executor_work_guard.hpp"
 
 #include "timer/periodic_timer.hpp"
 
