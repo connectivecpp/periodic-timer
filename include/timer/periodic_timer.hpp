@@ -1,40 +1,36 @@
-/** @file
+/** @mainpage Periodic Timer, Lightweight Timer Utility Using Asio
  *
- *  @defgroup timer_module Classes and functions for timer functionality.
+ * 
+ * based periods.
  *
- *  @ingroup timer_module
+ * Writing code using asynchronous timers from the Asio library is relatively easy. 
+ * However, there are no timers that are periodic. This class simplifies the task, 
+ * using application supplied function object callbacks.
  *
- *  @brief An asynchronous periodic timer providing both duration and timepoint 
- *  based periods.
+ * A @c periodic_timer stops when the application supplied function object 
+ * returns @c false rather than @c true.
  *
- *  Writing code using asynchronous timers from the Asio library is relatively easy. 
- *  However, there are no timers that are periodic. This class simplifies the task, 
- *  using application supplied function object callbacks.
+ * A periodic timer can be used as a "one-shot" timer by finishing after 
+ * one invocation (i.e. unconditionally return @c false from the function 
+ * object).
  *
- *  A @c periodic_timer stops when the application supplied function object 
- *  returns @c false rather than @c true.
+ * @note This class does not perform "this" reference counting. It is up to 
+ * the application code to guarantee that a @c periodic_timer has not been 
+ * destructed before handlers (function object callbacks) are invoked.
  *
- *  A periodic timer can be used as a "one-shot" timer by finishing after 
- *  one invocation (i.e. unconditionally return @c false from the function 
- *  object).
- *
- *  @note This class does not perform "this" reference counting. It is up to 
- *  the application code to guarantee that a @c periodic_timer has not been 
- *  destructed before handlers (function object callbacks) are invoked.
- *
- *  A common idiom is to use @c std::enable_shared_from_this, call 
- *  @c std::shared_from_this, and store the result in the function object 
- *  callback object.
+ * A common idiom is to use @c std::enable_shared_from_this, call 
+ * @c std::shared_from_this, and store the result in the function object 
+ * callback object.
  *  
- *  @note @c std::chrono facilities seem to be underspecified on @c noexcept,
- *  very few of the functions in @c periodic_timer are @c noexcept.
+ * @note @c std::chrono facilities seem to be underspecified on @c noexcept,
+ * very few of the functions in @c periodic_timer are @c noexcept.
  *
- *  @author Cliff Green
+ * @author Cliff Green
  *
- *  Copyright (c) 2017-2019 by Cliff Green
+ * Copyright (c) 2017-2024 by Cliff Green
  *
- *  Distributed under the Boost Software License, Version 1.0. 
- *  (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ * Distributed under the Boost Software License, Version 1.0. 
+ * (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  *
  */
 

@@ -1,12 +1,10 @@
 /** @file
  *
- *  @ingroup test_module
- *
  *  @brief Test scenarios for @c periodic_timer class template.
  *
  *  @author Cliff Green
  *
- *  Copyright (c) 2017-2018 by Cliff Green
+ *  Copyright (c) 2017-2024 by Cliff Green
  *
  *  Distributed under the Boost Software License, Version 1.0. 
  *  (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -15,7 +13,7 @@
 
 #define CATCH_CONFIG_ENABLE_CHRONO_STRINGMAKER
 
-#include "catch2/catch.hpp"
+#include "catch2/catch_test_macros.hpp"
 
 
 #include <chrono>
@@ -24,10 +22,9 @@
 #include <system_error>
 
 #include "asio/executor_work_guard.hpp"
-#include "asio/executor.hpp"
+#include "asio/executor_work_guard.hpp"
 
 #include "timer/periodic_timer.hpp"
-#include "utility/repeat.hpp"
 
 constexpr int Expected = 9;
 int count = 0;
