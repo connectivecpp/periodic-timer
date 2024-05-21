@@ -2,6 +2,13 @@
  *
  * ## Overview
  *
+ * The @c periodic_timer class template is an asynchronous periodic timer that wraps
+ * and simplifies Asio timers when periodic callbacks are needed. The periodicity can
+ * be based on either a simple duration or on timepoints based on a duration. When the
+ * timer is started, the application specifies whether each callback is invoked based
+ * on a duration (e.g. one second after the last callback), or on timepoints (e.g.
+ * a callback will be invoked each second according to the clock).
+ *
  * The Asio library does not directly provide periodic timers. Instead, application 
  * code using Asio must chain together function object callbacks until satisfied.
  *
@@ -28,6 +35,9 @@
  * system clock adjustments. In addition, if the timepoint interval is small and a large 
  * amount of processing is performed by the callback, "overflow" can occur, where the next 
  * timepoint callback is overrun by the current processing.
+ *
+ * An excellent article on this topic by Tony DaSilva can be [read here]
+ * (https://bulldozer00.blog/2013/12/27/periodic-processing-with-standard-c11-facilities/).
  *
  * An asynchronous timer is more resource-friendly regarding system resources than creating a 
  * thread that sleeps. In particular, creating hundreds or thousands of timers is very 
