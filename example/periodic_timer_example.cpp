@@ -2,8 +2,6 @@
  *  
  *  @brief Example code demonstrating use of @c chops::periodic_timer
  * 
- *  @ingroup example_module
- *
  *  @author Thurman Gillespy
  * 
  *  Copyright (c)2019 by Thurman Gillespy
@@ -16,6 +14,8 @@
  *  g++ -std=c++17 -I ~/Projects/utility-rack/include/ \
  *  -I ~/Projects/asio/asio/include/ \
  *  -I ~/Projects/ timer_demo.cpp -lpthread
+ *
+ *  This also builds with CMake files with C++ 20 specified
  */
 
 #include <iostream>
