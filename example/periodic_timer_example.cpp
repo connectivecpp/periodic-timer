@@ -1,21 +1,21 @@
 /** @file
  *  
- *  @brief Example code demonstrating use of @c chops::periodic_timer
+ * @brief Example code demonstrating use of @c chops::periodic_timer
  * 
- *  @author Thurman Gillespy
+ * @author Thurman Gillespy
  * 
- *  Copyright (c)2019 by Thurman Gillespy
- *  3/23/19
+ * @copyright (c) 2019 by Thurman Gillespy
+ * 3/23/19
  *
- *  Distributed under the Boost Software License, Version 1.0. 
- *  (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ * Distributed under the Boost Software License, Version 1.0. 
+ * (See accompanying file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  * 
- *  Sample make file:
- *  g++ -std=c++17 -I ~/Projects/utility-rack/include/ \
- *  -I ~/Projects/asio/asio/include/ \
- *  -I ~/Projects/ timer_demo.cpp -lpthread
+ * Sample make file:
+ * g++ -std=c++17 -I ~/Projects/utility-rack/include/ \
+ * -I ~/Projects/asio/asio/include/ \
+ * -I ~/Projects/ timer_demo.cpp -lpthread
  *
- *  This also builds with CMake files with C++ 20 specified
+ * This also builds with CMake files with C++ 20 specified
  */
 
 #include <iostream>
