@@ -74,11 +74,13 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h2><a class="anchor" id="autotoc_md0"></a>
 Overview</h2>
+<p>The <code>periodic_timer</code> class template is an asynchronous periodic timer that wraps and simplifies Asio timers when periodic callbacks are needed. The periodicity can be based on either a simple duration or on timepoints based on a duration. When the timer is started, the application specifies whether each callback is invoked based on a duration (e.g. one second after the last callback), or on timepoints (e.g. a callback will be invoked each second according to the clock).</p>
 <p>The Asio library does not directly provide periodic timers. Instead, application code using Asio must chain together function object callbacks until satisfied.</p>
 <p>The <code>periodic_timer</code> class template is a thin wrapper supplying the chaining, with two options for the periodicity. In addition, elapsed times are computed and provided to the application supplied callback.</p>
 <p>One periodicity option is to invoke the application callback after a duration. It is simple and provides consistency, specially if the system clock is allowed to be adjusted.</p>
 <p>The second periodicity option is to invoke the application callback based on timepoints. This works well in environments where activities must be processed on regular time intervals, regardless of how much processing is performed in each application callback. For example, an application may desire a timer callback to be invoked once every 500 milliseconds and the callback takes 15 milliseconds to excecute. Also occasionally the operating environment takes an extra 10 or 20 milliseconds before invoking the callback. Using a duration instead of a timepoint the actual interval is now 515 milliseconds between callback invocations, with occasional intervals up to 535 milliseconds. A timepoint timer will instead invoke the callback every 500 milliseconds (depending on operating system precision and load) regardless of how much time is taken by the previous callback.</p>
 <p>The main disadvantange of timepoint based callbacks is that they can be affected by system clock adjustments. In addition, if the timepoint interval is small and a large amount of processing is performed by the callback, "overflow" can occur, where the next timepoint callback is overrun by the current processing.</p>
+<p>An excellent article on this topic by Tony DaSilva can be [read here] (<a href="https://bulldozer00.blog/2013/12/27/periodic-processing-with-standard-c11-facilities/">https://bulldozer00.blog/2013/12/27/periodic-processing-with-standard-c11-facilities/</a>).</p>
 <p>An asynchronous timer is more resource-friendly regarding system resources than creating a thread that sleeps. In particular, creating hundreds or thousands of timers is very expensive in a "thread per timer" design.</p>
 <h3><a class="anchor" id="autotoc_md1"></a>
 Additional Details</h3>
@@ -90,7 +92,7 @@ Additional Details</h3>
 <p>A common idiom is to use <code>std::enable_shared_from_this</code>, call <code>std::shared_from_this</code>, and store the result in the function object callback object.</p>
 <dl class="section note"><dt>Note</dt><dd><code>std::chrono</code> facilities seem to be underspecified on <code>noexcept</code>, very few of the functions in <code>periodic_timer</code> are <code>noexcept</code>.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Cliff Green</dd></dl>
-<p>Copyright (c) 2017-2024 by Cliff Green</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>(c) 2017-2024 by Cliff Green</dd></dl>
 <p>Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a>) </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
