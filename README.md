@@ -10,6 +10,8 @@
 
 ![GH Tag](https://img.shields.io/github/v/tag/connectivecpp/periodic-timer?label=GH%20tag)
 
+![Licence](https://img.shields.io/badge/License-Boost%201.0-blue)
+
 ## Overview
 
 `periodic_timer` is an asynchronous periodic timer that wraps and simplifies Asio timers when periodic callbacks are needed. The periodicity can be based on either a simple duration or on timepoints based on a duration.
