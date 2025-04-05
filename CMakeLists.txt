@@ -27,6 +27,7 @@ add_library ( chops::periodic_timer ALIAS periodic_timer )
 
 # thread support specified in Asio download
 
+include ( cmake/download_cpm.cmake )
 include ( cmake/download_asio_cpm.cmake )
 
 # configure library target
