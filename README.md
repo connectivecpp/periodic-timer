@@ -24,7 +24,7 @@ Asynchronous timers from Asio are relatively easy to use. However, there are no 
 
 The generated Doxygen documentation for `periodic_timer` is [here](https://connectivecpp.github.io/periodic-timer/).
 
-## Dependencies
+## Library Dependencies
 
 The `periodic_timer` header file has the stand-alone Asio library for a dependency. Specific version (or branch) specs for the Asio dependency is in `cmake/download_asio_cpm.cmake`.
 
