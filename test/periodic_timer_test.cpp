@@ -47,7 +47,7 @@ void wait_util (std::chrono::milliseconds ms, wk_guard& wg, std::thread& thr) {
 template <typename Clock>
 void test_util () {
 
-  GIVEN ( "A clock and a duration") {
+  SECTION ( "Setup clock and duration") {
 
     asio::io_context ioc;
     chops::periodic_timer<Clock> timer {ioc};
@@ -56,7 +56,7 @@ void test_util () {
     std::thread thr([&ioc] () { ioc.run(); } );
     count = 0;
 
-    WHEN ( "The duration is 100 ms" ) {
+    SECTION ( "100 ms duration" ) {
       auto test_dur { 100 };
       timer.start_duration_timer(std::chrono::milliseconds(test_dur),
         [] (std::error_code err, typename Clock::duration elap) { 
@@ -66,11 +66,9 @@ void test_util () {
 
       wait_util (std::chrono::milliseconds((Expected+1)*test_dur), wg, thr);
 
-      THEN ( "the timer callback count should match expected") {
-        REQUIRE (count == Expected);
-      }
+      REQUIRE (count == Expected);
     }
-    WHEN ( "The duration is 200 ms and the start time is 2 seconds in the future" ) {
+    SECTION ( "200 ms duration, start time is 2 seconds in the future" ) {
       auto test_dur { 200 };
       timer.start_duration_timer(std::chrono::milliseconds(test_dur), Clock::now() + std::chrono::seconds(2),
         [] (std::error_code err, typename Clock::duration elap) { 
@@ -80,11 +78,9 @@ void test_util () {
 
       wait_util(std::chrono::milliseconds((Expected+1)*test_dur + 2000), wg, thr);
 
-      THEN ( "the timer callback count should match expected") {
-        REQUIRE (count == Expected);
-      }
+      REQUIRE (count == Expected);
     }
-    WHEN ( "The duration is 100 ms and the timer pops on timepoints" ) {
+    SECTION ( "100 ms duration, timer pops on timepoints" ) {
       auto test_dur { 100 };
       timer.start_timepoint_timer(std::chrono::milliseconds(test_dur),
         [] (std::error_code err, typename Clock::duration elap) { 
@@ -94,11 +90,9 @@ void test_util () {
 
       wait_util (std::chrono::milliseconds((Expected+1)*test_dur), wg, thr);
 
-      THEN ( "the timer callback count should match expected") {
-        REQUIRE (count == Expected);
-      }
+      REQUIRE (count == Expected);
     }
-    WHEN ( "The duration is 200 ms and the timer pops on timepoints starting 2 seconds in the future" ) {
+    SECTION ( "200 ms duration, timer pops on timepoints starting 2 seconds in the future" ) {
       auto test_dur { 200 };
       timer.start_timepoint_timer(std::chrono::milliseconds(test_dur), Clock::now() + std::chrono::seconds(2),
         [] (std::error_code err, typename Clock::duration elap) { 
@@ -108,25 +102,23 @@ void test_util () {
 
       wait_util(std::chrono::milliseconds((Expected+1)*test_dur + 2000), wg, thr);
 
-      THEN ( "the timer callback count should match expected") {
-        REQUIRE (count == Expected);
-      }
+      REQUIRE (count == Expected);
     }
 
-  } // end given
+  }
 }
 
-SCENARIO ( "A periodic timer can be instantiated on the steady clock", "[periodic_timer] [steady_clock]" ) {
+TEST_CASE ( "Steady clock periodic timer", "[periodic_timer] [steady_clock]" ) {
 
   test_util<std::chrono::steady_clock>();
 
 }
-SCENARIO ( "A periodic timer can be instantiated on the system clock", "[periodic_timer] [system_clock]" ) {
+TEST_CASE ( "System clock periodic timer", "[periodic_timer] [system_clock]" ) {
 
   test_util<std::chrono::system_clock>();
 
 }
-SCENARIO ( "A periodic timer can be instantiated on the high resolution clock", "[periodic_timer] [high_resolution_clock]" ) {
+TEST_CASE ( "High resolution clock periodic timer", "[periodic_timer] [high_resolution_clock]" ) {
 
   test_util<std::chrono::high_resolution_clock>();
 
